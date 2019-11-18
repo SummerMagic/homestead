@@ -1,0 +1,48 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 2
+provider: parallels
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: /Users/magic/loupan-service
+      to: /home/vagrant/code
+
+sites:
+    - map: cs.loupan.test
+      to: /home/vagrant/code/loupan_v3.com/public_html
+      php: "7.1"
+      type: "loupan_v3"
+
+    - map: m.loupan.test
+      to: /home/vagrant/code/m.loupan.com/public_html
+      php: "7.1"
+
+    - map: www.loupan.test
+      to: /home/vagrant/code/loupan_v2.com/public_html
+      php: "7.1"
+      type: "loupan_v2"
+
+    - map: public.loupan.my
+      to: /home/vagrant/code/resources
+      php: "7.1"
+
+databases:
+    - homestead
+
+features:
+    - mariadb: false
+    - ohmyzsh: false
+    - webdriver: false
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
