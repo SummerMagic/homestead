@@ -32,6 +32,10 @@ sites:
       to: /home/vagrant/code/resources
       php: "7.1"
 
+    - map: admin.loupan.test
+      to: /home/vagrant/code/admin.loupan.com/public_html
+      php: "7.1"
+
 databases:
     - homestead
 
