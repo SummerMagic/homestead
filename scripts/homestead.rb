@@ -9,7 +9,8 @@ class Homestead
 
     # Allow SSH Agent Forward from The Box
     config.ssh.forward_agent = true
-
+    enable_serial_logging = false
+    config.vm.box_check_update = false
     # Configure Verify Host Key
     if settings.has_key?('verify_host_key')
       config.ssh.verify_host_key = settings['verify_host_key']
