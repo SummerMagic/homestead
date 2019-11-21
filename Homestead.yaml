@@ -17,7 +17,6 @@ sites:
     - map: cs.loupan.test
       to: /home/vagrant/code/loupan_v3.com/public_html
       php: "7.1"
-      #type: "loupan_v3"
       type: "apache"
       xhgui: 'true'
 
@@ -47,10 +46,10 @@ databases:
     - homestead
 
 features:
-    - ohmyzsh: false
+    - ohmyzsh: true
     - webdriver: false
-    - mongodb: false
-    - openresty: false
+    - mongodb: true
+    - openresty: true
 # ports:
 #     - send: 50000
 #       to: 5000
