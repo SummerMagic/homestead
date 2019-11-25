@@ -14,7 +14,8 @@ chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
 apt install -y php-tideways
 phpenmod -v ALL tideways
 
-git clone https://github.com/perftools/xhgui.git /opt/xhgui
+#git clone https://github.com/perftools/xhgui.git /opt/xhgui
+git clone https://github.com/laynefyc/xhgui-branch /opt/xhgui
 
 cat <<'EOT' > /opt/xhgui/webroot/.htaccess
 <IfModule mod_rewrite.c>
