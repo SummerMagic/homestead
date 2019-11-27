@@ -46,7 +46,7 @@ databases:
 features:
     - ohmyzsh: false
     - webdriver: false
-    - mongodb: false
+    - mongodb: true
     - openresty: false
 # ports:
 #     - send: 50000
