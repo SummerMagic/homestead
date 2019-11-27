@@ -18,15 +18,18 @@ sites:
       to: /home/vagrant/code/loupan_v3.com/public_html
       php: "7.3"
       type: "loupan_v3"
+      xhgui: 'true'
 
     - map: m.loupan.test
       to: /home/vagrant/code/m.loupan.com/public_html
       php: "7.3"
+      xhgui: 'true'
 
     - map: www.loupan.test
       to: /home/vagrant/code/loupan_v2.com/public_html
       php: "7.3"
       type: "loupan_v2"
+      xhgui: 'true'
 
     - map: public.loupan.my
       to: /home/vagrant/code/resources
@@ -35,6 +38,7 @@ sites:
     - map: admin.loupan.test
       to: /home/vagrant/code/admin.loupan.com/public_html
       php: "7.3"
+      xhgui: 'true'
 
 databases:
     - homestead
