@@ -30,9 +30,9 @@ fi
 
 if [ "$7" = "true" ]
 then configureXhgui="
-location /xhgui {
-        try_files \$uri \$uri/ /xhgui/index.php?\$args;
-}
+    location /xhgui {
+            try_files \$uri \$uri/ /xhgui/index.php?\$args;
+    }
 "
 else configureXhgui=""
 fi

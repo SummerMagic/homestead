@@ -15,15 +15,15 @@ apt install -y php-tideways
 phpenmod -v ALL tideways
 
 #git clone https://github.com/perftools/xhgui.git /opt/xhgui
-git clone https://github.com/laynefyc/xhgui-branch /opt/xhgui
+# git clone https://github.com/laynefyc/xhgui-branch /opt/xhgui
 
-cat <<'EOT' > /opt/xhgui/webroot/.htaccess
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ /xhgui/index.php [QSA,L]
-</IfModule>
-EOT
+# cat <<'EOT' > /opt/xhgui/webroot/.htaccess
+# <IfModule mod_rewrite.c>
+# 	RewriteEngine On
+# 	RewriteCond %{REQUEST_FILENAME} !-f
+# 	RewriteRule ^ /xhgui/index.php [QSA,L]
+# </IfModule>
+# EOT
 
 cat <<'EOT' > /opt/xhgui/config/config.php
 <?php
@@ -143,12 +143,13 @@ db.results.ensureIndex( { "meta.request_ts" : 1 }, { expireAfterSeconds : 432000
 
 cd /opt/xhgui
 php install.php
-
-for version in 5.6 7.0 7.1 7.2 7.3
+#5.6 7.0 7.1 7.2 7.3 只安装7以上的版本
+for version in 7.1 7.2 7.3
 do
   cat << 'EOT' > /etc/php/$version/mods-available/xhgui.ini
-; Include xhgui's header for performance profiling.
-auto_prepend_file="/opt/xhgui/external/header.php"
+;Include xhgui's header for performance profiling.
+;auto_prepend_file="/opt/xhgui/external/header.php"
+extension=tideways_xhprof.so
 EOT
 done
 phpenmod -v ALL xhgui

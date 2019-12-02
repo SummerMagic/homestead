@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# 修改mongodb 为4.2
 export DEBIAN_FRONTEND=noninteractive
 
 if [ -f /home/vagrant/.homestead-features/mongodb ]
@@ -11,8 +11,11 @@ fi
 touch /home/vagrant/.homestead-features/mongodb
 chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
 
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 2>&1
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 2>&1
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B 2>&1
+
+#echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
 
 sudo apt-get update
 
@@ -25,7 +28,7 @@ sudo systemctl enable mongod
 sudo systemctl start mongod
 
 sudo rm -rf /tmp/mongo-php-driver /usr/src/mongo-php-driver
-git clone -c advice.detachedHead=false -q -b '1.5.2' --single-branch https://github.com/mongodb/mongo-php-driver.git /tmp/mongo-php-driver
+git clone -c advice.detachedHead=false -q -b '1.6.0' --single-branch https://github.com/mongodb/mongo-php-driver.git /tmp/mongo-php-driver
 sudo mv /tmp/mongo-php-driver /usr/src/mongo-php-driver
 cd /usr/src/mongo-php-driver
 git submodule -q update --init
@@ -83,14 +86,14 @@ sudo ln -s /etc/php/7.3/mods-available/mongo.ini /etc/php/7.3/cli/conf.d/20-mong
 sudo ln -s /etc/php/7.3/mods-available/mongo.ini /etc/php/7.3/fpm/conf.d/20-mongo.ini
 sudo service php7.3-fpm restart
 
-phpize7.4
-./configure --with-php-config=/usr/bin/php-config7.4 > /dev/null
-make clean > /dev/null
-make >/dev/null 2>&1
-sudo make install
-sudo bash -c "echo 'extension=mongodb.so' > /etc/php/7.4/mods-available/mongo.ini"
-sudo ln -s /etc/php/7.4/mods-available/mongo.ini /etc/php/7.4/cli/conf.d/20-mongo.ini
-sudo ln -s /etc/php/7.4/mods-available/mongo.ini /etc/php/7.4/fpm/conf.d/20-mongo.ini
-sudo service php7.4-fpm restart
+# phpize7.4
+# ./configure --with-php-config=/usr/bin/php-config7.4 > /dev/null
+# make clean > /dev/null
+# make >/dev/null 2>&1
+# sudo make install
+# sudo bash -c "echo 'extension=mongodb.so' > /etc/php/7.4/mods-available/mongo.ini"
+# sudo ln -s /etc/php/7.4/mods-available/mongo.ini /etc/php/7.4/cli/conf.d/20-mongo.ini
+# sudo ln -s /etc/php/7.4/mods-available/mongo.ini /etc/php/7.4/fpm/conf.d/20-mongo.ini
+# sudo service php7.4-fpm restart
 
 mongo admin --eval "db.createUser({user:'homestead',pwd:'secret',roles:['root']})"
