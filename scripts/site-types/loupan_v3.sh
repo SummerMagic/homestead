@@ -47,7 +47,7 @@ block="server {
 
     charset utf-8;
 
-    include "/home/vagrant/code/nginx-configure/rewrite/rewrite_loupan_v2.com.conf";
+    include "/home/vagrant/code/nginx-configure/rewrite/rewrite_loupan_v3.com.conf";
 
     $rewritesTXT
 
