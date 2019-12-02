@@ -9,6 +9,8 @@ class Homestead
 
     # Allow SSH Agent Forward from The Box
     config.ssh.forward_agent = true
+    enable_serial_logging = false
+    config.vm.box_check_update = false
 
     # Configure Verify Host Key
     if settings.has_key?('verify_host_key')
@@ -101,13 +103,13 @@ class Homestead
 
     # Default Port Forwarding
     default_ports = {
-      80 => 8000,
-      443 => 44300,
-      3306 => 33060,
-      4040 => 4040,
-      5432 => 54320,
-      8025 => 8025,
-      9600 => 9600,
+      80    => 8000,
+      443   => 44300,
+      3306  => 33060,
+      4040  => 4040,
+      5432  => 54320,
+      8025  => 8025,
+      9600  => 9600,
       27017 => 27017
     }
 

@@ -2,11 +2,11 @@
 
 # Check If xhgui Has Been Installed
 
-if [ -f /home/vagrant/.homestead-features/xhgui ]
-then
-    echo "xhgui already installed."
-    exit 0
-fi
+# if [ -f /home/vagrant/.homestead-features/xhgui ]
+# then
+#     echo "xhgui already installed."
+#     exit 0
+# fi
 
 touch /home/vagrant/.homestead-features/xhgui
 chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
@@ -16,13 +16,13 @@ phpenmod -v ALL tideways
 
 git clone https://github.com/perftools/xhgui.git /opt/xhgui
 
-cat <<'EOT' > /opt/xhgui/webroot/.htaccess
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ /xhgui/index.php [QSA,L]
-</IfModule>
-EOT
+# cat <<'EOT' > /opt/xhgui/webroot/.htaccess
+# <IfModule mod_rewrite.c>
+# 	RewriteEngine On
+# 	RewriteCond %{REQUEST_FILENAME} !-f
+# 	RewriteRule ^ /xhgui/index.php [QSA,L]
+# </IfModule>
+# EOT
 
 cat <<'EOT' > /opt/xhgui/config/config.php
 <?php
@@ -146,7 +146,7 @@ php install.php
 for version in 5.6 7.0 7.1 7.2 7.3 7.4
 do
   cat << 'EOT' > /etc/php/$version/mods-available/xhgui.ini
-; Include xhgui's header for performance profiling.
+;Include xhgui's header for performance profiling.
 auto_prepend_file="/opt/xhgui/external/header.php"
 EOT
 done
