@@ -2,7 +2,7 @@
 ip: "192.168.10.10"
 memory: 2048
 cpus: 2
-provider: parallels
+provider: virtualbox
 
 authorize: ~/.ssh/id_rsa.pub
 
@@ -10,31 +10,12 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: /Users/magic/loupan-service
+    - map: ~/code
       to: /home/vagrant/code
 
 sites:
-    - map: cs.loupan.test
-      to: /home/vagrant/code/loupan_v3.com/public_html
-      php: "7.3"
-      type: "apache"
-      xhgui: 'true'
-
-    - map: m.loupan.test
-      to: /home/vagrant/code/m.loupan.com/public_html
-      php: "7.3"
-      type: "apache"
-      xhgui: 'true'
-
-    - map: www.loupan.test
-      to: /home/vagrant/code/loupan_v2.com/public_html
-      php: "7.3"
-      type: "apache"
-      xhgui: 'true'
-
-    - map: public.loupan.my
-      to: /home/vagrant/code/resources
-      php: "7.3"
+    - map: homestead.test
+      to: /home/vagrant/code/public
 
 databases:
     - homestead
