@@ -9,3 +9,4 @@ phpunit.xml
 /postgres_backup
 /user-customizations.sh
 .idea
+.DS_Store
