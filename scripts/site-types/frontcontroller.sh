@@ -43,16 +43,12 @@ block="server {
     server_name .$1;
     root \"$2\";
 
-    index index.html index.htm index.php;
-
     charset utf-8;
-
-    include "/home/vagrant/code/nginx-configure/rewrite/rewrite_loupan_v3.com.conf";
 
     $rewritesTXT
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files \$uri /index.php?\$query_string;
         $headersTXT
     }
 
@@ -66,16 +62,12 @@ block="server {
 
     sendfile off;
 
-    location ~ \.php$ {
+    location = /index.php {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/var/run/php/php$5-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-
-
-        # 添加xghui
-        # fastcgi_param PHP_VALUE "auto_prepend_file=/opt/xhgui/external/header.php";
         $paramsTXT
 
         fastcgi_intercept_errors off;
