@@ -11,10 +11,10 @@ fi
 touch /home/vagrant/.homestead-features/mongodb
 chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
 
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 2>&1
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
-
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B 2>&1
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
 sudo apt-get update
+
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confnew" install mongodb-org autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev php-dev
 
@@ -25,7 +25,7 @@ sudo systemctl enable mongod
 sudo systemctl start mongod
 
 sudo rm -rf /tmp/mongo-php-driver /usr/src/mongo-php-driver
-git clone -c advice.detachedHead=false -q -b '1.5.2' --single-branch https://github.com/mongodb/mongo-php-driver.git /tmp/mongo-php-driver
+git clone -c advice.detachedHead=false -q -b '1.6.0' --single-branch https://github.com/mongodb/mongo-php-driver.git /tmp/mongo-php-driver
 sudo mv /tmp/mongo-php-driver /usr/src/mongo-php-driver
 cd /usr/src/mongo-php-driver
 git submodule -q update --init

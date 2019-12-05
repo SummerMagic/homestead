@@ -9,4 +9,8 @@ phpunit.xml
 /postgres_backup
 /user-customizations.sh
 .idea
+<<<<<<< HEAD
 /.DS_Store
+=======
+.DS_Store
+>>>>>>> develop_10

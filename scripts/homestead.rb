@@ -9,6 +9,8 @@ class Homestead
 
     # Allow SSH Agent Forward from The Box
     config.ssh.forward_agent = true
+    enable_serial_logging = false
+    config.vm.box_check_update = false
 
     # Configure Verify Host Key
     if settings.has_key?('verify_host_key')
@@ -19,7 +21,7 @@ class Homestead
     config.vm.define settings['name'] ||= 'homestead'
     config.vm.box = settings['box'] ||= 'laravel/homestead'
     unless settings.has_key?('SpeakFriendAndEnter')
-      config.vm.box_version = settings['version'] ||= '>= 8.2.0'
+      config.vm.box_version = settings['version'] ||= '>= 9.0.0'
     end
     config.vm.hostname = settings['hostname'] ||= 'homestead'
 
@@ -101,13 +103,13 @@ class Homestead
 
     # Default Port Forwarding
     default_ports = {
-      80 => 8000,
-      443 => 44300,
-      3306 => 33060,
-      4040 => 4040,
-      5432 => 54320,
-      8025 => 8025,
-      9600 => 9600,
+      80    => 8000,
+      443   => 44300,
+      3306  => 33060,
+      4040  => 4040,
+      5432  => 54320,
+      8025  => 8025,
+      9600  => 9600,
       27017 => 27017
     }
 
@@ -260,8 +262,6 @@ class Homestead
 
     # Install All The Configured Nginx Sites
     if settings.include? 'sites'
-      # socket = { 'map' => 'socket-wrench.test', 'to' => '/var/www/socket-wrench/public' }
-      # settings['sites'].unshift(socket)
 
       domains = []
 
@@ -330,7 +330,7 @@ class Homestead
               site['to'],                 # $2
               site['port'] ||= http_port, # $3
               site['ssl'] ||= https_port, # $4
-              site['php'] ||= '7.3',      # $5
+              site['php'] ||= '7.4',      # $5
               params ||= '',              # $6
               site['xhgui'] ||= '',       # $7
               site['exec'] ||= 'false',   # $8
@@ -435,6 +435,11 @@ class Homestead
 
         config.vm.provision 'shell' do |s|
           s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/7.3/fpm/pool.d/www.conf"
+          s.args = [var['key'], var['value']]
+        end
+
+        config.vm.provision 'shell' do |s|
+          s.inline = "echo \"\nenv[$1] = '$2'\" >> /etc/php/7.4/fpm/pool.d/www.conf"
           s.args = [var['key'], var['value']]
         end
 

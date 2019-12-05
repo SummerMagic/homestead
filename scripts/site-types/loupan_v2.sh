@@ -72,6 +72,9 @@ block="server {
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+
+        # 添加xghui
+        # fastcgi_param PHP_VALUE "auto_prepend_file=/opt/xhgui/external/header.php";
         $paramsTXT
 
         fastcgi_intercept_errors off;

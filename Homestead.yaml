@@ -2,7 +2,7 @@
 ip: "192.168.10.10"
 memory: 2048
 cpus: 2
-provider: parallels
+provider: virtualbox
 
 authorize: ~/.ssh/id_rsa.pub
 
@@ -16,34 +16,42 @@ folders:
 sites:
     - map: cs.loupan.test
       to: /home/vagrant/code/loupan_v3.com/public_html
-      php: "7.3"
-      type: "apache"
-      xhgui: 'true'
+      php: "7.1"
+      type: "loupan_v3"
+      # xhgui: 'true'
 
     - map: m.loupan.test
       to: /home/vagrant/code/m.loupan.com/public_html
-      php: "7.3"
-      type: "apache"
-      xhgui: 'true'
+      php: "7.1"
+      # xhgui: 'true'
 
     - map: www.loupan.test
       to: /home/vagrant/code/loupan_v2.com/public_html
-      php: "7.3"
-      type: "apache"
-      xhgui: 'true'
+      php: "7.1"
+      type: "loupan_v2"
+      # xhgui: 'true'
 
     - map: public.loupan.my
       to: /home/vagrant/code/resources
-      php: "7.3"
+      php: "7.1"
+
+    - map: admin.loupan.test
+      to: /home/vagrant/code/admin.loupan.com/public_html
+      php: "7.1"
+      # xhgui: 'true'
+
+    - map: local.xhprof-gui.com
+      to: /home/vagrant/code/xhgui-branch/webroot
+      php: "7.1"
 
 databases:
     - homestead
 
 features:
-    - mariadb: false
     - ohmyzsh: false
     - webdriver: false
-
+    - mongodb: false
+    - openresty: false
 # ports:
 #     - send: 50000
 #       to: 5000
