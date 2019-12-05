@@ -14,7 +14,8 @@ chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
 apt install -y php-tideways
 phpenmod -v ALL tideways
 
-git clone https://github.com/perftools/xhgui.git /opt/xhgui
+# git clone https://github.com/perftools/xhgui.git /opt/xhgui
+# git clone https://github.com/laynefyc/xhgui-branch /opt/xhgui
 
 # cat <<'EOT' > /opt/xhgui/webroot/.htaccess
 # <IfModule mod_rewrite.c>
@@ -141,9 +142,10 @@ db.results.ensureIndex( { 'meta.simple_url' : 1 } ); \
 db.results.ensureIndex( { "meta.request_ts" : 1 }, { expireAfterSeconds : 432000 } )" xhprof
 
 cd /opt/xhgui
-php install.php
-
-for version in 5.6 7.0 7.1 7.2 7.3 7.4
+# php install.php
+# /usr/lib/php/20160303 php7.1
+for version in 7.0 7.1 7.2 7.3 7.4
+#for version in 5.6 7.0 7.1 7.2 7.3 7.4
 do
   cat << 'EOT' > /etc/php/$version/mods-available/xhgui.ini
 ;Include xhgui's header for performance profiling.
