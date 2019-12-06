@@ -1,23 +1,5 @@
 #!/usr/bin/env bash
 
-# Check If xhgui Has Been Installed
-
-if [ -f /home/vagrant/.homestead-features/xhgui ]
-then
-    echo "xhgui already installed."
-    exit 0
-fi
-
-touch /home/vagrant/.homestead-features/xhgui
-chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
-
-# apt install -y php-tideways
-# phpenmod -v ALL tideways
-
-# git clone https://github.com/perftools/xhgui.git /opt/xhgui
-git clone https://github.com/laynefyc/xhgui-branch /opt/xhgui
-
-
 cat <<'EOT' > /opt/xhgui/config/config.php
 <?php
 /**
@@ -124,34 +106,3 @@ return array(
 
     );
 EOT
-
-# Add indexes documented at https://github.com/perftools/xhgui#installation
-mongo --eval "db.results.ensureIndex( { 'meta.SERVER.REQUEST_TIME' : -1 } ); \
-db.results.ensureIndex( { 'profile.main().wt' : -1 } ); \
-db.results.ensureIndex( { 'profile.main().mu' : -1 } ); \
-db.results.ensureIndex( { 'profile.main().cpu' : -1 } ); \
-db.results.ensureIndex( { 'meta.url' : 1 } ); \
-db.results.ensureIndex( { 'meta.simple_url' : 1 } ); \
-db.results.ensureIndex( { "meta.request_ts" : 1 }, { expireAfterSeconds : 432000 } )" xhprof
-
-# cd /opt/xhgui
-# php install.php
-for version in 5.6 7.0 7.1 7.2 7.3 7.4
-do
-  cat << 'EOT' > /etc/php/$version/mods-available/xhgui.ini
-;Include xhgui's header for performance profiling.
-auto_prepend_file="/opt/xhgui/external/header.php"
-zend_extension=xdebug.so
-xdebug.remote_connect_back = 1
-xdebug.max_nesting_level = 512
-xdebug.remote_enable = 1
-xdebug.remote_connect_back = 1
-xdebug.remote_port = 9001
-xdebug.scream=0
-xdebug.show_local_vars=1
-xdebug.idekey=PHPSTORM
-
-EOT
-done
-# phpenmod -v ALL xhgui
-
