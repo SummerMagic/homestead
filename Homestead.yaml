@@ -14,17 +14,17 @@ folders:
       to: /home/vagrant/code
 
 sites:
-    - map: cs.loupan.test
+    - map: cs.dev.loupan.com
       to: /home/vagrant/code/loupan_v3.com/public_html
       php: "7.4"
       type: "loupan_v3"
       # xhgui: 'true'
 
-    - map: m.loupan.test
+    - map: m.dev.loupan.com
       to: /home/vagrant/code/m.loupan.com/public_html
       php: "7.4"
 
-    - map: www.loupan.test
+    - map: www.dev.loupan.com
       to: /home/vagrant/code/loupan_v2.com/public_html
       php: "7.4"
       type: "loupan_v2"
@@ -33,13 +33,22 @@ sites:
       to: /home/vagrant/code/resources
       php: "7.4"
 
-    - map: admin.loupan.test
+    - map: admin.dev.loupan.com
       to: /home/vagrant/code/admin.loupan.com/public_html
       php: "7.4"
 
     - map: local.xhprof-gui.com
       to: /home/vagrant/code/xhgui-branch/webroot
       php: "7.4"
+
+    - map: local.whatsns.com
+      to: /home/vagrant/code/whatsns
+      php: "7.4"
+
+    - map: user.dev.loupan.com
+      to: /home/vagrant/code/user.loupan.com/public_html
+      php: "7.4"
+      type: "loupan_v3"
 
 databases:
     - homestead
