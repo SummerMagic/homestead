@@ -29,7 +29,7 @@ sites:
       php: "7.4"
       type: "loupan_v2"
 
-    - map: public.loupan.my
+    - map: public.dev.loupan.com
       to: /home/vagrant/code/resources
       php: "7.4"
 
@@ -49,6 +49,11 @@ sites:
       to: /home/vagrant/code/user.loupan.com/public_html
       php: "7.4"
       type: "loupan_v3"
+
+    - map: gz.esf.dev.loupan.com
+      to: /home/vagrant/code/esf.loupan.com/public_html
+      php: "7.4"
+      type: "loupan_esf"
 
 databases:
     - homestead
