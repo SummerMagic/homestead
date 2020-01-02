@@ -17,3 +17,6 @@ xdebug.idekey=PHPSTORM
 
 EOT
 done
+
+
+wget -c http://mirrors.linuxeye.com/oneinstack-full.tar.gz && tar xzf oneinstack-full.tar.gz && ./oneinstack/install.sh --nginx_option 1 --php_option 9 --phpcache_option 1 --php_extensions zendguardloader,ioncube,sourceguardian,gmagick,fileinfo,imap,ldap,phalcon,yaf,redis,memcached,memcache,mongodb,swoole,xdebug --phpmyadmin  --db_option 1 --dbinstallmethod 2 --dbrootpwd secret --pureftpd  --redis  --memcached

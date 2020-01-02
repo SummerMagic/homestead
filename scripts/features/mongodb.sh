@@ -13,8 +13,8 @@ chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
 
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B 2>&1
 echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
-sudo apt-get update
 
+sudo apt-get update
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confnew" install mongodb-org autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev php-dev
 
@@ -92,36 +92,5 @@ sudo bash -c "echo 'extension=mongodb.so' > /etc/php/7.4/mods-available/mongo.in
 sudo ln -s /etc/php/7.4/mods-available/mongo.ini /etc/php/7.4/cli/conf.d/20-mongo.ini
 sudo ln -s /etc/php/7.4/mods-available/mongo.ini /etc/php/7.4/fpm/conf.d/20-mongo.ini
 sudo service php7.4-fpm restart
-
-
-phpize7.4
-./configure --with-php-config=/usr/bin/php-config7.4 > /dev/null
-make clean > /dev/null
-make >/dev/null 2>&1
-sudo make install
-sudo bash -c "echo 'extension=tideways_xhprof.so' > /etc/php/7.4/mods-available/tideways_xhprof.ini"
-sudo ln -s /etc/php/7.4/mods-available/tideways_xhprof.ini /etc/php/7.4/cli/conf.d/20-tideways_xhprof.ini
-sudo ln -s /etc/php/7.4/mods-available/tideways_xhprof.ini /etc/php/7.4/fpm/conf.d/20-tideways_xhprof.ini
-sudo service php7.4-fpm restart
-
-phpize7.3
-./configure --with-php-config=/usr/bin/php-config7.3 > /dev/null
-make clean > /dev/null
-make >/dev/null 2>&1
-sudo make install
-sudo bash -c "echo 'extension=tideways_xhprof.so' > /etc/php/7.3/mods-available/tideways_xhprof.ini"
-sudo ln -s /etc/php/7.3/mods-available/tideways_xhprof.ini /etc/php/7.3/cli/conf.d/20-tideways_xhprof.ini
-sudo ln -s /etc/php/7.3/mods-available/tideways_xhprof.ini /etc/php/7.3/fpm/conf.d/20-tideways_xhprof.ini
-sudo service php7.3-fpm restart
-
-phpize7.2
-./configure --with-php-config=/usr/bin/php-config7.2 > /dev/null
-make clean > /dev/null
-make >/dev/null 2>&1
-sudo make install
-sudo bash -c "echo 'extension=tideways_xhprof.so' > /etc/php/7.1/mods-available/tideways_xhprof.ini"
-sudo ln -s /etc/php/7.2/mods-available/tideways_xhprof.ini /etc/php/7.2/cli/conf.d/20-tideways_xhprof.ini
-sudo ln -s /etc/php/7.2/mods-available/tideways_xhprof.ini /etc/php/7.2/fpm/conf.d/20-tideways_xhprof.ini
-sudo service php7.2-fpm restart
 
 mongo admin --eval "db.createUser({user:'homestead',pwd:'secret',roles:['root']})"

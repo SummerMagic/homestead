@@ -2,21 +2,32 @@
 
 # Check If xhgui Has Been Installed
 
-if [ -f /home/vagrant/.homestead-features/xhgui ]
-then
-    echo "xhgui already installed."
-    exit 0
-fi
+# if [ -f /home/vagrant/.homestead-features/xhgui ]
+# then
+#     echo "xhgui already installed."
+#     exit 0
+# fi
 
 touch /home/vagrant/.homestead-features/xhgui
 chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
 
+echo 'deb http://s3-eu-west-1.amazonaws.com/tideways/packages debian main' | sudo tee /etc/apt/sources.list.d/tideways.list
+wget -qO - https://s3-eu-west-1.amazonaws.com/tideways/packages/EEB5E8F4.gpg | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install tideways-php tideways-daemon
+
 # apt install -y php-tideways
 # phpenmod -v ALL tideways
 
-# git clone https://github.com/perftools/xhgui.git /opt/xhgui
-git clone https://github.com/laynefyc/xhgui-branch /opt/xhgui
+git clone https://github.com/perftools/xhgui.git /opt/xhgui
 
+# cat <<'EOT' > /opt/xhgui/webroot/.htaccess
+# <IfModule mod_rewrite.c>
+# 	RewriteEngine On
+# 	RewriteCond %{REQUEST_FILENAME} !-f
+# 	RewriteRule ^ /xhgui/index.php [QSA,L]
+# </IfModule>
+# EOT
 
 cat <<'EOT' > /opt/xhgui/config/config.php
 <?php
@@ -135,23 +146,14 @@ db.results.ensureIndex( { 'meta.simple_url' : 1 } ); \
 db.results.ensureIndex( { "meta.request_ts" : 1 }, { expireAfterSeconds : 432000 } )" xhprof
 
 # cd /opt/xhgui
-# php install.php
-for version in 5.6 7.0 7.1 7.2 7.3 7.4
-do
-  cat << 'EOT' > /etc/php/$version/mods-available/xhgui.ini
-;Include xhgui's header for performance profiling.
-auto_prepend_file="/opt/xhgui/external/header.php"
-zend_extension=xdebug.so
-xdebug.remote_connect_back = 1
-xdebug.max_nesting_level = 512
-xdebug.remote_enable = 1
-xdebug.remote_connect_back = 1
-xdebug.remote_port = 9001
-xdebug.scream=0
-xdebug.show_local_vars=1
-xdebug.idekey=PHPSTORM
+# # php install.php
 
-EOT
-done
+# for version in 7.1 7.2 7.3 7.4
+# do
+#     cat << 'EOT' > /etc/php/$version/mods-available/xhgui.ini
+# ; Include xhgui's header for performance profiling.
+# ;auto_prepend_file="/opt/xhgui/external/header.php"
+# EOT
+# done
 # phpenmod -v ALL xhgui
 

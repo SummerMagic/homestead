@@ -21,7 +21,7 @@ class Homestead
     config.vm.define settings['name'] ||= 'homestead'
     config.vm.box = settings['box'] ||= 'laravel/homestead'
     unless settings.has_key?('SpeakFriendAndEnter')
-      config.vm.box_version = settings['version'] ||= '>= 9.1.0'
+      config.vm.box_version = settings['version'] ||= '>= 9.0.0'
     end
     config.vm.hostname = settings['hostname'] ||= 'homestead'
 
@@ -35,7 +35,7 @@ class Homestead
     # Configure Additional Networks
     if settings.has_key?('networks')
       settings['networks'].each do |network|
-        config.vm.network network['type'], ip: network['ip'], bridge: network['bridge'] ||= nil, netmask: network['netmask'] ||= '255.255.255.0'
+        config.vm.network network['type'], ip: network['ip'], mac: network['mac'], bridge: network['bridge'] ||= nil, netmask: network['netmask'] ||= '255.255.255.0'
       end
     end
 
@@ -103,13 +103,13 @@ class Homestead
 
     # Default Port Forwarding
     default_ports = {
-      80    => 8000,
-      443   => 44300,
-      3306  => 33060,
-      4040  => 4040,
-      5432  => 54320,
-      8025  => 8025,
-      9600  => 9600,
+      80 => 8000,
+      443 => 44300,
+      3306 => 33060,
+      4040 => 4040,
+      5432 => 54320,
+      8025 => 8025,
+      9600 => 9600,
       27017 => 27017
     }
 
