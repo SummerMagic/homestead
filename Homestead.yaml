@@ -1,8 +1,8 @@
 ---
-ip: "192.168.10.10"
+ip: "192.168.20.20"
 memory: 2048
 cpus: 2
-provider: virtualbox
+provider: parallels
 
 authorize: ~/.ssh/id_rsa.pub
 
@@ -10,83 +10,27 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: /Users/magic/loupan-service
+    - map: /Users/magic/Code
       to: /home/vagrant/code
 
 sites:
-
-    - map: swagger.tools.dev.loupan.com
-      to: /home/vagrant/code/swagger.tools.loupan.com
-      php: "7.3"
-
-    - map: service.dev.loupan.com
-      to:  /home/vagrant/code/service.loupan.com-user/public
-      php: "7.3"
-      type: "loupan_v3"
-
-    - map: cs.dev.loupan.com
-      to: /home/vagrant/code/loupan_v3.com/public_html
-      php: "7.4"
-      type: "loupan_v3"
-      # xhgui: 'true'
-
-    - map: m.dev.loupan.com
-      to: /home/vagrant/code/m.loupan.com/public_html
+    - map: dev.ehome.test
+      to: /home/vagrant/code/ehome-cms/public
       php: "7.4"
 
-    - map: www.dev.loupan.com
-      to: /home/vagrant/code/loupan_v2.com/public_html
+    - map: dev.ejucms.io
+      to: /home/vagrant/code/ejucms/public
       php: "7.4"
-      type: "loupan_v2"
-
-    - map: public.loupan.my
-      to: /home/vagrant/code/resources
-      php: "7.4"
-
-    - map: admin.dev.loupan.com
-      to: /home/vagrant/code/admin.loupan.com/public_html
-      php: "7.4"
-
-    - map: local.xhprof-gui.com
-      to: /home/vagrant/code/xhgui-branch/webroot
-      php: "7.4"
-
-    - map: local.whatsns.com
-      to: /home/vagrant/code/whatsns
-      php: "7.4"
-
-    - map: user.dev.loupan.com
-      to: /home/vagrant/code/user.loupan.com/public_html
-      php: "7.4"
-      type: "loupan_v3"
-
-    - map: manage.dev.loupan.com
-      to: /home/vagrant/code/manage.loupan.com/public_html
-      php: "7.4"
-
-    - map: gz.esf.dev.loupan.com
-      to: /home/vagrant/code/esf.loupan.com/public_html
-      php: "7.4"
-      type: "loupan_esf"
-
-    - map: local.loupan.com
-      to: /home/vagrant/code/ci
-      php: "7.4"
-
-    - map: local.zentao.com
-      to: /home/vagrant/code/zentao
-      php: "7.4"
-
-
-
 databases:
     - homestead
 
 features:
-    - ohmyzsh: true
+    - mariadb: false
+    - ohmyzsh: false
     - webdriver: false
     - mongodb: true
     - openresty: true
+
 # ports:
 #     - send: 50000
 #       to: 5000

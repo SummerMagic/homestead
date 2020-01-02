@@ -2,7 +2,7 @@
     "ip": "192.168.10.10",
     "memory": 2048,
     "cpus": 2,
-    "provider": "virtualbox",
+    "provider": "parallels",
     "authorize": "~/.ssh/id_rsa.pub",
     "keys": [
         "~/.ssh/id_rsa"
@@ -25,10 +25,10 @@
     "features": [
         {
             "mariadb": false
-        }, 
+        },
         {
             "ohmyzsh": false
-        }, 
+        },
         {
             "webdriver": false
         }

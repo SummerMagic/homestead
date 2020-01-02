@@ -1,4 +1,3 @@
-
 curl -sL https://deb.nodesource.com/setup_13.x | bash
 ## Run `sudo apt-get install -y nodejs` to install Node.js 13.x and npm
 ## You may also need development tools to build native addons:
