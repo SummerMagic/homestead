@@ -41,6 +41,7 @@ block="server {
     listen ${3:-80};
     listen ${4:-443} ssl http2;
     server_name .$1;
+    # include "/home/vagrant/code/nginx-loupan/server_name.conf";
     root \"$2\";
 
     index index.html index.htm index.php;
@@ -48,6 +49,7 @@ block="server {
     charset utf-8;
 
     include "/home/vagrant/code/nginx-configure/rewrite/rewrite_loupan_v3.com.conf";
+    include "/home/vagrant/code/nginx-configure/rewrite/rewrite_esf.loupan.com.conf";
 
     $rewritesTXT
 

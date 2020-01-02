@@ -14,6 +14,16 @@ folders:
       to: /home/vagrant/code
 
 sites:
+
+    - map: swagger.tools.dev.loupan.com
+      to: /home/vagrant/code/swagger.tools.loupan.com
+      php: "7.3"
+
+    - map: service.dev.loupan.com
+      to:  /home/vagrant/code/service.loupan.com-user/public
+      php: "7.3"
+      type: "loupan_v3"
+
     - map: cs.dev.loupan.com
       to: /home/vagrant/code/loupan_v3.com/public_html
       php: "7.4"
@@ -29,7 +39,7 @@ sites:
       php: "7.4"
       type: "loupan_v2"
 
-    - map: public.dev.loupan.com
+    - map: public.loupan.my
       to: /home/vagrant/code/resources
       php: "7.4"
 
@@ -50,10 +60,24 @@ sites:
       php: "7.4"
       type: "loupan_v3"
 
+    - map: manage.dev.loupan.com
+      to: /home/vagrant/code/manage.loupan.com/public_html
+      php: "7.4"
+
     - map: gz.esf.dev.loupan.com
       to: /home/vagrant/code/esf.loupan.com/public_html
       php: "7.4"
       type: "loupan_esf"
+
+    - map: local.loupan.com
+      to: /home/vagrant/code/ci
+      php: "7.4"
+
+    - map: local.zentao.com
+      to: /home/vagrant/code/zentao
+      php: "7.4"
+
+
 
 databases:
     - homestead
