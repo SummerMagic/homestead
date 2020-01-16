@@ -45,16 +45,12 @@ block="server {
     charset utf-8;
     index index.html index.htm index.php;
     $rewritesTXT
-    # 域名+项目2
 
-    ###system
     location ~ ^/system/(.*)$ {
-        set $service_root "/home/vagrant/code/service.loupan.com-system/public";
-        alias $service_root;
+        alias /home/vagrant/code/service.loupan.com-system/public/;
         index index.php;
-        try_files $uri $uri/ @system;
+        try_files \$uri \$uri/ @system;
     }
-
     location @system {
         fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
@@ -70,14 +66,11 @@ block="server {
     }
 
 
-    ### vote
     location ~ ^/vote/(.*)$ {
-        set $service_root "/home/vagrant/code/service.loupan.com-vote/public";
-        alias $service_root;
+        alias /home/vagrant/code/service.loupan.com-vote/public/;
         index index.php;
-        try_files $uri $uri/ @vote;
+        try_files \$uri \$uri/ @vote;
     }
-
     location @vote {
         fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
@@ -93,15 +86,32 @@ block="server {
     }
 
 
-    ### notifier
-    location ~ ^/notifier/(.*)$ {
-        set $service_root "/home/vagrant/code/service.loupan.com-notifier/public";
-        alias $service_root;
+    location ~ ^/groupbuy/(.*)$ {
+        alias /home/vagrant/code/service.loupan.com-groupbuy/public/;
         index index.php;
-        try_files $uri $uri/ @notifier;
+        try_files \$uri \$uri/ @groupbuy;
+    }
+    location @groupbuy {
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /home/vagrant/code/service.loupan.com-groupbuy/public/index.php;
+        fastcgi_param SCRIPT_NAME     /index.php;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
     }
 
-    location @system {
+
+    location ~ ^/notifier/(.*)$ {
+        alias /home/vagrant/code/service.loupan.com-notifier/public/;
+        index index.php;
+        try_files \$uri \$uri/ @notifier;
+    }
+    location @notifier {
         fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
@@ -115,19 +125,55 @@ block="server {
         fastcgi_read_timeout 300;
     }
 
-    ###
-    location ~ ^/groupbuy/(.*)$ {
-        set $service_root "/home/vagrant/code/service.loupan.com-groupbuy/public";
-        alias $service_root;
+    location ~ ^/housedict/(.*)$ {
+        alias /home/vagrant/code/service.loupan.com-housedict/public/;
         index index.php;
-        try_files $uri $uri/ @groupbuy;
+        try_files \$uri \$uri/ @housedict;
     }
-
-    location @groupbuy {
+    location @housedict {
         fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME /home/vagrant/code/service.loupan.com-groupbuy/public/index.php;
+        fastcgi_param SCRIPT_FILENAME /home/vagrant/code/service.loupan.com-housedict/public/index.php;
+        fastcgi_param SCRIPT_NAME     /index.php;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ ^/media/(.*)$ {
+        alias /home/vagrant/code/service.loupan.com-media/public/;
+        index index.php;
+        try_files \$uri \$uri/ @media;
+    }
+    location @media {
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /home/vagrant/code/service.loupan.com-media/public/index.php;
+        fastcgi_param SCRIPT_NAME     /index.php;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+    }
+
+
+    location ~ ^/site/(.*)$ {
+        alias /home/vagrant/code/service.loupan.com-site/public/;
+        index index.php;
+        try_files \$uri \$uri/ @site;
+    }
+    location @site {
+        fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /home/vagrant/code/service.loupan.com-site/public/index.php;
         fastcgi_param SCRIPT_NAME     /index.php;
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
